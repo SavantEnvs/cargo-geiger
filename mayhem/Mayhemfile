@@ -1,0 +1,6 @@
+project: savantenvs/cargo-geiger
+target: find-unsafe
+
+cmds:
+  - cmd: /mayhem/find_unsafe
+    libfuzzer: true
