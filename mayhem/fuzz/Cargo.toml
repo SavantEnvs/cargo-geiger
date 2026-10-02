@@ -1,0 +1,25 @@
+[package]
+name = "geiger-fuzz"
+version = "0.0.0"
+authors = ["Automatically generated"]
+publish = false
+edition = "2018"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+
+[dependencies.geiger]
+path = "../../geiger"
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "find_unsafe"
+path = "fuzz_targets/find_unsafe.rs"
+test = false
+doc = false
