@@ -1,0 +1,36 @@
+[package]
+name = "geiger-fuzz"
+version = "0.0.0"
+authors = ["Automatically generated"]
+publish = false
+edition = "2018"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+# Pinned to what was current when the original run ended (2022-09-28; the
+# mayhemheroes commit's own author dates predate its dependency requirements,
+# so that's the reliable anchor — see mayhem/build.sh). A fresh (unlocked)
+# resolution otherwise picks TODAY's latest libfuzzer-sys/arbitrary, whose
+# Arbitrary byte-decoding for (bool, &str) differs enough that the original
+# run's crashers decode to different, non-crashing values (BACKPORT.md,
+# "Input-interface caveat") — and today's syn no longer has the parser bug
+# this target's crashers trigger.
+libfuzzer-sys = "=0.4.4"
+arbitrary = "=1.1.6"
+syn = "=1.0.101"
+proc-macro2 = "=1.0.44"
+
+[dependencies.geiger]
+path = "../../geiger"
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "find_unsafe"
+path = "fuzz_targets/find_unsafe.rs"
+test = false
+doc = false

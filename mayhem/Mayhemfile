@@ -1,0 +1,7 @@
+project: savantenvs/cargo-geiger
+target: find-unsafe-buggy-mhh-run-16
+
+cmds:
+  - cmd: /mayhem/find_unsafe
+    libfuzzer: true
+# origin: https://app.mayhem.security/mayhemheroes/cargo-geiger/find-unsafe/16
